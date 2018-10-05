@@ -6,19 +6,16 @@ Latest Stable Node Version (https://nodejs.org/en/blog/release/v8.9.0/)
 Sql server instance 
 
 ## Running the application
-- In root folder run start-app.bat 
-- It will start to processes:
-- The angular build (npm install and build)
-- The Rest Api.
+- In root folder run build-spa.bat to npm install and build prod artifact
+- Once spa finihed to build
+- Run start-api.bat to start rest api
 
-Wait for all processes to start before testing. Usually Web spa will take longer time to start as need to install node modules.
-
-Once all services are running, open http://localhost:5000 and start testing.
+Once api is running, open http://localhost:5000 and start testing.
 
 ## Running the application manually
 - Open scr\Document.Api\Client
-- cmd npm install (to get node modules)
-- cmd npm run build-prod (to build angular artifacts)
+- npm install (to get node modules)
+- npm run build-prod (to build angular artifacts)
 - Open scr\Document.Api\
 - dotnet run (to start the rest api)
 
