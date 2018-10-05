@@ -40,6 +40,6 @@ export class FileListComponent implements OnInit {
         this.confirmRef.close();
         this.alertService.openSuccess(messages["File.Removed"])
         this.getFiles();
-      }));
+      }, (error) => this.confirmRef.close()));
   }
 }
