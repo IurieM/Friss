@@ -1,0 +1,7 @@
+<form #f="ngForm" role="form">
+    <div class="form-group">
+        <file-upload (onFileRead)="updateModel($event)" maxFileSize="500000"></file-upload>
+        <input type="hidden" [ngModel]="fileName" required name="file" />
+        <button mat-raised-button color="primary" name="save" [disabled]="!f.valid" (click)="save()">{{'Save' | translate }}</button>
+    </div>
+</form>

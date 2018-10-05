@@ -1,0 +1,16 @@
+.confirm-content{
+    text-align:center;
+}
+
+.confirm-param
+{
+    font-weight: bold;
+}
+
+.mat-dialog-title{
+  margin: 0 !important;
+}
+.accent {
+    background-color: white;
+    color:#dd0330;
+}

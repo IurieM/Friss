@@ -1,0 +1,38 @@
+<div class='container main-content'>
+
+  <div class="card">
+    <div class="card-header">
+      {{pageTitle}}
+    </div>
+
+    <div class="card-body">
+      <form novalidate (ngSubmit)="login(loginForm)" #loginForm="ngForm" autocomplete="off">
+        <fieldset>
+          <div class="form-group">
+            <mat-form-field>
+              <input required #usernameVar="ngModel" matInput ngModel name="username" placeholder="User name" maxlength="100">
+              <mat-error>
+                <show-error [model]="usernameVar"></show-error>
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="form-group">
+            <mat-form-field>
+              <input type="password" required #passwordVar="ngModel" matInput ngModel name="password" placeholder="User password" maxlength="100">
+              <mat-error>
+                <show-error [model]="passwordVar"></show-error>
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="form-group">
+            <button mat-raised-button class="pull-right" type="submit" name="save" color="primary" [disabled]="!loginForm.valid">
+              Log In
+            </button>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</div>
