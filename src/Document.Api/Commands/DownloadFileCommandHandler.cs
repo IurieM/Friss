@@ -4,20 +4,20 @@ using System.Threading;
 using Document.Data.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using System;
-using Document.Api.Services;
 using Document.Api.Models;
+using Document.Api.Services.Factories;
 
 namespace Document.Api.Commands
 {
     public class DownloadFileCommandHandler : IRequestHandler<DownloadFileCommand, DownloadFileModel>
     {
         private readonly IDocumentDbContext dbContext;
-        private readonly IStoreFileService storeFileService;
+        private readonly IFileServiceFactory fileServiceFactory;
 
-        public DownloadFileCommandHandler(IDocumentDbContext dbContext, IStoreFileService storeFileService)
+        public DownloadFileCommandHandler(IDocumentDbContext dbContext, IFileServiceFactory fileServiceFactory)
         {
             this.dbContext = dbContext;
-            this.storeFileService = storeFileService;
+            this.fileServiceFactory = fileServiceFactory;
         }
 
         public async Task<DownloadFileModel> Handle(DownloadFileCommand request, CancellationToken cancellationToken)
@@ -25,7 +25,7 @@ namespace Document.Api.Commands
 
             var dbfile = await dbContext.Files.FirstOrDefaultAsync(file => file.Id == request.FileId);
 
-            var fileContent = await storeFileService.DownloadAsync(dbfile.Name);
+            var fileContent = await fileServiceFactory.Intance.DownloadAsync(dbfile.Name);
 
             dbfile.LastAccessedDate = DateTime.UtcNow;
 

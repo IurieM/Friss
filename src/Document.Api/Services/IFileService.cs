@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 
 namespace Document.Api.Services
 {
-    public interface IStoreFileService
+    public interface IFileService
     {
-        bool CanUpload(string storageType);
+        bool CanHandle(string storageType);
         Task UploadAsync(IFormFile formFile);
         Task<Stream> DownloadAsync(string fileName);
         void DeleteFile(string fileName);

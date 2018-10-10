@@ -1,6 +1,7 @@
 ﻿using Document.Api.Infrastructure.Extensions;
 using Document.Api.Infrastructure.Filters;
 using Document.Api.Services;
+using Document.Api.Services.Factories;
 using Document.Api.Settings;
 using Document.Common;
 using Document.Data.DbContexts;
@@ -46,7 +47,10 @@ namespace Document.Api
         {
             services.Configure<AuthenticationSettings>(Configuration.GetSection("AuthenticationSettings"));
             services.Configure<FileStorageSettings>(Configuration.GetSection("FileStorageSettings"));
-            services.AddScoped<IStoreFileService, FileSystemStorageService>();
+
+            services.AddScoped<IFileService, FileSystemService>();
+            services.AddScoped<IFileServiceFactory, FileServiceFactory>();
+
             services.AddMediatR(typeof(Startup).GetTypeInfo().Assembly);
             services.AddAppIdentity();
 

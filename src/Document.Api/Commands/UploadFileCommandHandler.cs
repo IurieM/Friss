@@ -8,25 +8,26 @@ using Microsoft.EntityFrameworkCore;
 using Document.Common;
 using Document.Api.Services;
 using Document.Common.Exceptions;
+using Document.Api.Services.Factories;
 
 namespace Document.Api.Commands
 {
     public class UploadFileCommandHandler : IRequestHandler<UploadFileCommand, int>
     {
         private readonly IDocumentDbContext dbContext;
-        private readonly IStoreFileService fileStorageService;
+        private readonly IFileServiceFactory fileServiceFactory;
 
-        public UploadFileCommandHandler(IDocumentDbContext dbContext, IStoreFileService fileStorageService)
+        public UploadFileCommandHandler(IDocumentDbContext dbContext, IFileServiceFactory fileServiceFactory)
         {
             this.dbContext = dbContext;
-            this.fileStorageService = fileStorageService;
+            this.fileServiceFactory = fileServiceFactory;
         }
 
         public async Task<int> Handle(UploadFileCommand request, CancellationToken cancellationToken)
         {
             await FileNameIsUnique(request.File.FileName);
 
-            await fileStorageService.UploadAsync(request.File);
+            await fileServiceFactory.Intance.UploadAsync(request.File);
 
             var newFile = new File()
             {

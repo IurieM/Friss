@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace Document.Api.Services
 {
-    public class FileSystemStorageService : IStoreFileService
+    public class FileSystemService : IFileService
     {
         private readonly IOptions<FileStorageSettings> fileStorage;
 
-        public FileSystemStorageService(IOptions<FileStorageSettings> fileStorage)
+        public FileSystemService(IOptions<FileStorageSettings> fileStorage)
         {
             this.fileStorage = fileStorage;
         }
 
-        public bool CanUpload(string storageType)
+        public bool CanHandle(string storageType)
         {
             return storageType == Constants.FileStorageType.FileSystem;
         }
